@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import firebase, { auth } from "@/services/fireinit.js";
+import { firebaseMutations } from "vuexfire";
 
 const createStore = () => {
   return new Vuex.Store({
@@ -7,17 +8,18 @@ const createStore = () => {
       user: null
     },
     getters: {
-      activeUser: (state, getters) => {
+      activeUser: state => {
         return state.user;
       }
     },
     mutations: {
       setUser(state, payload) {
         state.user = payload;
-      }
+      },
+      ...firebaseMutations
     },
     actions: {
-      signInWithEmail({ commit }, payload) {
+      signInWithEmail(payload) {
         return auth.signInWithEmailAndPassword(payload.email, payload.password);
       },
       signOut({ commit }) {
@@ -26,7 +28,7 @@ const createStore = () => {
           .then(() => {
             commit("setUser", null);
           })
-          .catch(err => console.log(error));
+          .catch(err => console.log(err));
       }
     }
   });
