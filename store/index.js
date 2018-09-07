@@ -1,25 +1,31 @@
 import Vuex from "vuex";
-import firebase, { auth } from "@/services/fireinit.js";
-import { firebaseMutations } from "vuexfire";
+import firebase, { auth, StoreDB } from "@/services/fireinit.js";
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      user: null
+      user: null,
+      servers: {}
     },
     getters: {
       activeUser: state => {
         return state.user;
+      },
+      servers2: state => {
+        return state.servers;
       }
     },
     mutations: {
       setUser(state, payload) {
         state.user = payload;
       },
-      ...firebaseMutations
+      setServer(state, { server }) {
+        console.log(server);
+        state.servers = { ...state.servers, [server.id]: server.data() };
+      }
     },
     actions: {
-      signInWithEmail(payload) {
+      signInWithEmail({ commit }, payload) {
         return auth.signInWithEmailAndPassword(payload.email, payload.password);
       },
       signOut({ commit }) {
@@ -29,6 +35,11 @@ const createStore = () => {
             commit("setUser", null);
           })
           .catch(err => console.log(err));
+      },
+      async getServers({ commit }) {
+        let serverRef = StoreDB.collection("servrar");
+        let servers = await serverRef.get();
+        servers.forEach(server => commit("setServer", { server }));
       }
     }
   });

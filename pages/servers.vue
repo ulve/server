@@ -2,22 +2,20 @@
 <div>
     <h2>här visas servrarna</h2>
     <ul>
-        <li v-for="(server, idx) in servers" :key="idx">{{server.name}}</li>
+        <li v-for="server in this.$store.state.servers" :key="server.id">
+            katt{{server.name}}
+        </li>
     </ul>
+    <button @click="getServers">Hämta servrar</button>
 </div>
 </template>
 <script>
 import { StoreDB } from "@/services/fireinit.js";
 export default {
-  data() {
-    return {
-      servers: []
-    };
-  },
-  firestore() {
-    return {
-      locations: StoreDB.collection("servers")
-    };
+  methods: {
+    getServers() {
+      this.$store.dispatch("getServers");
+    }
   }
 };
 </script>
