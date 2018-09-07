@@ -3,7 +3,7 @@
     <h2>här visas servrarna</h2>
     <ul>
         <li v-for="server in this.$store.state.servers" :key="server.id">
-            katt{{server.name}}
+            {{server.name}}
         </li>
     </ul>
     <button @click="getServers">Hämta servrar</button>

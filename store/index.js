@@ -36,10 +36,12 @@ const createStore = () => {
           })
           .catch(err => console.log(err));
       },
-      async getServers({ commit }) {
+      getServers({ commit }) {
         let serverRef = StoreDB.collection("servrar");
-        let servers = await serverRef.get();
-        servers.forEach(server => commit("setServer", { server }));
+        serverRef.onSnapshot(snap => {
+          console.log(snap);
+          snap.forEach(server => commit("setServer", { server }));
+        });
       }
     }
   });
