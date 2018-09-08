@@ -16,10 +16,10 @@ const createStore = () => {
       }
     },
     mutations: {
-      setUser(state, payload) {
+      c(state, payload) {
         state.user = payload;
       },
-      setServer(state, { server }) {
+      SET_SERVER(state, { server }) {
         console.log(server);
         state.servers = { ...state.servers, [server.id]: server.data() };
       }
@@ -32,7 +32,7 @@ const createStore = () => {
         auth
           .signOut()
           .then(() => {
-            commit("setUser", null);
+            commit("SET_USER", null);
           })
           .catch(err => console.log(err));
       },
@@ -40,7 +40,7 @@ const createStore = () => {
         let serverRef = StoreDB.collection("servrar");
         serverRef.onSnapshot(snap => {
           console.log(snap);
-          snap.forEach(server => commit("setServer", { server }));
+          snap.forEach(server => commit("SET_SERVER", { server }));
         });
       }
     }
