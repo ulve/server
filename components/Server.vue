@@ -28,7 +28,7 @@
            <v-btn fab dark color="red" class="mx-2 my-2" @click="edit=false">
             <v-icon dark>cancel</v-icon>
           </v-btn>
-          <v-btn fab dark color="green" class="mx-2 my-2" @click="edit=false">
+          <v-btn fab dark color="green" class="mx-2 my-2" @click="save">
             <v-icon dark>save</v-icon>
           </v-btn>
         </v-layout>
@@ -51,7 +51,10 @@ export default {
   props: ["server", "branch", "user", "comment"],
   data: function() {
     return {
-      edit: false
+      edit: false,
+      newUser: "",
+      newComment: "",
+      newBranch: ""
     };
   },
   computed: {
@@ -67,6 +70,25 @@ export default {
         colour += ("00" + value.toString(16)).substr(-2);
       }
       return colour;
+    }
+  },
+  methods: {
+    save() {
+      console.log(
+        `Sparar: ${this.newBranch} ${this.newUser} ${this.newComment}`
+      );
+
+      this.$store.dispatch("updateServer", {
+        server: this.server,
+        branch: this.newBranch,
+        user: this.newUser,
+        comment: this.newComment
+      });
+
+      this.newUser = "";
+      this.newComment = "";
+      this.newBranch = "";
+      this.edit = false;
     }
   }
 };
