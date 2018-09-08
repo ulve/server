@@ -2,15 +2,17 @@
 
   <v-layout row wrap>
     <v-flex xs12>
-      <v-card :color="color" class="white--text">
+      <v-card raised :color="color" class="white--text">
       <v-card-title primary-title>
           <div class="headline">{{this.server}}</div>
       </v-card-title>
+
       <v-card-text v-if="edit">
         <v-text-field v-model="newBranch" prepend-icon="star" name="newBranch" label="Gren" type="text"></v-text-field>
         <v-text-field v-model="newUser" prepend-icon="accessible" name="newUser" label="Användare" type="text"></v-text-field>
         <v-textarea v-model="newComment" prepend-icon="lock" name="newComment" label="Kommentar"></v-textarea>
       </v-card-text>
+
       <v-card-text v-else>
         <v-layout>
           <v-flex xs1>
@@ -23,6 +25,7 @@
           </v-flex>
         </v-layout>
       </v-card-text>
+
       <v-card-actions v-if="edit">
          <v-layout row wrap justify-end>
            <v-btn fab dark color="red" class="mx-2 my-2" @click="edit=false">
@@ -33,6 +36,7 @@
           </v-btn>
         </v-layout>
       </v-card-actions>
+
       <v-card-actions v-else>
         <v-layout row wrap justify-end>
           <v-btn fab dark color="cyan" class="mx-2 my-2" @click="edit=true">

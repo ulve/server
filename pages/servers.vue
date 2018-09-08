@@ -4,8 +4,8 @@
       <v-container
         fluid
         grid-list-lg>
-          <v-layout row wrap>
-            <v-flex xs12>
+          <v-layout row justify-center>
+            <v-flex xs8>
               <Server
                 v-for="server in this.$store.getters.servers"
                 :key="server.name"

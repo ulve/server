@@ -6,7 +6,7 @@
 export default {
   computed: {
     isLoggedIn() {
-      return this.$store.getters.activeUser !== null;
+      return this.$store.state.activeUser !== null;
     }
   },
   methods: {
