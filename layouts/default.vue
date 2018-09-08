@@ -8,10 +8,15 @@
    
     <v-footer :fixed="fixed" app>
       <span>Viktigt testverktyg ™</span>
+      <v-layout justify-end>
+        <logout />
+      </v-layout>
     </v-footer>
   </v-app>
 </template>
 <script>
+import Logout from "~/components/Logout.vue";
+
 export default {
   data() {
     return {
@@ -32,6 +37,9 @@ export default {
     user() {
       return this.$store.getters.activeUser;
     }
+  },
+  components: {
+    Logout
   }
 };
 </script>

@@ -16,7 +16,6 @@
             </v-flex>
           </v-layout>
         </v-container>
-     <v-btn flat dark @click="getServers">Hämta servrar</v-btn>
     </v-card>
 
 </template>
@@ -25,10 +24,8 @@
 import Server from "~/components/Server.vue";
 
 export default {
-  methods: {
-    getServers() {
-      this.$store.dispatch("getServers");
-    }
+  mounted() {
+    this.$store.dispatch("getServers");
   },
   components: {
     Server
