@@ -11,7 +11,7 @@ const createStore = () => {
       activeUser: state => {
         return state.user;
       },
-      servers2: state => {
+      servers: state => {
         return state.servers;
       }
     },
