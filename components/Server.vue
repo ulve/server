@@ -6,7 +6,12 @@
       <v-card-title primary-title>
           <div class="headline">{{this.server}}</div>
       </v-card-title>
-      <v-card-text>
+      <v-card-text v-if="edit">
+        <v-text-field v-model="newBranch" prepend-icon="star" name="newBranch" label="Gren" type="text"></v-text-field>
+        <v-text-field v-model="newUser" prepend-icon="accessible" name="newUser" label="Användare" type="text"></v-text-field>
+        <v-textarea v-model="newComment" prepend-icon="lock" name="newComment" label="Kommentar"></v-textarea>
+      </v-card-text>
+      <v-card-text v-else>
         <v-layout>
           <v-flex xs1>
             <v-icon dark x-large>extension</v-icon>
@@ -18,9 +23,19 @@
           </v-flex>
         </v-layout>
       </v-card-text>
-      <v-card-actions>
-        <v-layout row wrap  justify-end>
-          <v-btn fab dark color="cyan" class="mx-2 my-2">
+      <v-card-actions v-if="edit">
+         <v-layout row wrap justify-end>
+           <v-btn fab dark color="red" class="mx-2 my-2" @click="edit=false">
+            <v-icon dark>cancel</v-icon>
+          </v-btn>
+          <v-btn fab dark color="green" class="mx-2 my-2" @click="edit=false">
+            <v-icon dark>save</v-icon>
+          </v-btn>
+        </v-layout>
+      </v-card-actions>
+      <v-card-actions v-else>
+        <v-layout row wrap justify-end>
+          <v-btn fab dark color="cyan" class="mx-2 my-2" @click="edit=true">
             <v-icon dark>edit</v-icon>
           </v-btn>
         </v-layout>
@@ -34,7 +49,11 @@
 <script>
 export default {
   props: ["server", "branch", "user", "comment"],
-
+  data: function() {
+    return {
+      edit: false
+    };
+  },
   computed: {
     color() {
       let hash = 0;
