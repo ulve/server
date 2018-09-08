@@ -16,7 +16,7 @@ const createStore = () => {
       }
     },
     mutations: {
-      c(state, payload) {
+      SET_USER(state, payload) {
         state.user = payload;
       },
       SET_SERVER(state, { server }) {
