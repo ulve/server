@@ -16,7 +16,7 @@
     <v-footer :fixed="fixed" app>
       <span>Viktigt testverktyg ™</span>
       <v-layout justify-end>
-        <logout />
+        <logout v-if="this.$store.getters.activeUser" />
       </v-layout>
     </v-footer>
   </v-app>
