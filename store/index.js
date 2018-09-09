@@ -16,43 +16,29 @@ const createStore = () => {
       }
     },
     mutations: {
-      SET_USER(state, payload) {
-        state.user = payload;
-      },
-      SET_SERVER(state, { server }) {
-        console.log(server);
-        state.servers = { ...state.servers, [server.id]: server.data() };
-      },
-      FUCKO(state, { server }) {
-        state.server;
-      }
+      SET_USER: (state, payload) => (state.user = payload),
+      SET_SERVER: (state, { server }) =>
+        (state.servers = { ...state.servers, [server.id]: server.data() })
     },
     actions: {
-      signInWithEmail({ commit }, payload) {
-        return auth.signInWithEmailAndPassword(payload.email, payload.password);
-      },
-      signOut({ commit }) {
+      signInWithEmail: (_, payload) =>
+        auth.signInWithEmailAndPassword(payload.email, payload.password),
+      signOut: ({ commit }) =>
         auth
           .signOut()
           .then(() => {
             commit("SET_USER", null);
           })
-          .catch(err => console.log(err));
-      },
-      getServers({ commit }) {
+          .catch(err => console.log(err)),
+      getServers: ({ commit }) => {
         let serverRef = StoreDB.collection("servrar");
         serverRef.onSnapshot(snap => {
-          console.log(snap);
           snap.forEach(server => commit("SET_SERVER", { server }));
         });
       },
-      updateServer({ commit }, payload) {
-        console.log("Nu är vi i storen. letar efter " + payload.server);
-        for (let s in this.state.servers) {
-          if (this.state.servers[s].name === payload.server) {
-            console.log(
-              `Ska spara: ${payload.branch} ${payload.user} ${payload.comment}`
-            );
+      updateServer: ({ state }, payload) => {
+        for (let s in state.servers) {
+          if (state.servers[s].name === payload.server) {
             StoreDB.collection("servrar")
               .doc(s)
               .set({
@@ -61,7 +47,6 @@ const createStore = () => {
                 branch: payload.branch,
                 user: payload.user
               })
-              .then(() => console.log("Lyckades spara!"))
               .catch(() => console.error("Något gick fel"));
           }
         }

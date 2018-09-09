@@ -89,10 +89,6 @@ export default {
   },
   methods: {
     save() {
-      console.log(
-        `Sparar: ${this.newBranch} ${this.newUser} ${this.newComment}`
-      );
-
       this.$store.dispatch("updateServer", {
         server: this.server,
         branch: this.newBranch,
