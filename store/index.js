@@ -1,5 +1,5 @@
 import Vuex from "vuex";
-import firebase, { auth, StoreDB } from "@/services/fireinit.js";
+import { auth, StoreDB } from "@/services/fireinit.js";
 
 const createStore = () => {
   return new Vuex.Store({
@@ -8,12 +8,8 @@ const createStore = () => {
       servers: {}
     },
     getters: {
-      activeUser: state => {
-        return state.user;
-      },
-      servers: state => {
-        return state.servers;
-      }
+      activeUser: state => state.user,
+      servers: state => state.servers
     },
     mutations: {
       SET_USER: (state, payload) => (state.user = payload),

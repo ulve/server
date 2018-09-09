@@ -1,6 +1,6 @@
 <template>
 
-<v-app dark>
+  <v-app dark>
     <v-content>
       <v-container>
         <v-layout row align-center>  

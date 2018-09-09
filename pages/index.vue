@@ -1,6 +1,6 @@
 <template>
 
- <v-container>
+  <v-container>
     <v-layout column align-center>  
       <v-flex xs2>
         <v-btn v-if="!isLoggedIn" color="primary" nuxt large dark to="/login">
@@ -11,7 +11,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
- </v-container>
+  </v-container>
 
 </template>
 

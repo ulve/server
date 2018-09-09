@@ -1,5 +1,5 @@
 <template>
-    <v-btn v-if="isLoggedIn" color="red" @click="logOut">Logga ut</v-btn>
+  <v-btn v-if="isLoggedIn" color="red" @click="logOut">Logga ut</v-btn>
 </template>
 
 <script>
