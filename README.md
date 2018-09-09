@@ -1,6 +1,6 @@
 # server
 
-> Nuxt.js project
+Test av nuxt tillsammans med firebase. Håller reda på vilka grenar och vem som jobbar på vilken server.
 
 ## Build Setup
 
