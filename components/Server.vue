@@ -78,19 +78,32 @@ export default {
   },
   computed: {
     color() {
-      let hash = 0;
+      const rnd = (seed, min, max) => {
+        const x = Math.sin(seed) * 10000;
+        const h = x - Math.floor(x); //0..1
 
-      let str = this.server;
-      for (var i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-      }
-      let color = "#";
-      for (var j = 0; j < 3; j++) {
-        let value = (hash >> (j * 8)) & 0xff;
-        color += ("00" + value.toString(16)).substr(-2);
-      }
+        return Math.ceil(min + h * (max - min));
+      };
 
-      return color;
+      const hash = s => {
+        let hash = 0,
+          i,
+          chr;
+        if (s.length === 0) return hash;
+        for (i = 0; i < s.length; i++) {
+          chr = s.charCodeAt(i);
+          hash = (hash << 5) - hash + chr;
+          hash |= 0;
+        }
+        return hash;
+      };
+
+      let seed = hash(this.server);
+      const h = rnd(seed++, 0, 360);
+      const s = rnd(seed++, 10, 40);
+      const l = rnd(seed++, 30, 50);
+
+      return `hsla(${h},${s}%,${l}%,0.9)`;
     }
   },
   methods: {
